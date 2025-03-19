@@ -1302,36 +1302,85 @@
       </div>
 
       <div class="col-lg-6">
-        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
-          data-aos-delay="500">
-          <div class="row gy-4">
 
-            <div class="col-md-6">
-              <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+
+        <!-- <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="300"> -->
+          <form class="php-email-form" data-aos="fade-up" data-aos-delay="300">
+
+            <div class="row gy-4">
+  
+              <div class="col-md-6">
+                <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+              </div>
+  
+              <div class="col-md-6 ">
+                <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+              </div>
+  
+              <div class="col-md-12">
+                <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+              </div>
+  
+              <div class="col-md-12">
+                <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+              </div>
+  
+              <div class="col-md-12 text-center">
+                <div class="loading">Loading</div>
+                <!-- <div class="error-message"></div> -->
+                <div class="error-meseji"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+  
+                <button type="submit">Send Message</button>
+              </div>
+  
             </div>
+          </form><!-- End Contact Form -->
 
-            <div class="col-md-6 ">
-              <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-            </div>
 
-            <div class="col-md-12">
-              <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-            </div>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    emailjs.init("3KB3W2CByomxfFC_M"); // Your Public Key
 
-            <div class="col-md-12">
-              <textarea class="form-control" name="message" rows="4" placeholder="Message" required=""></textarea>
-            </div>
+    document.querySelector(".php-email-form").addEventListener("submit", function (event) {
+      event.preventDefault();
 
-            <div class="col-md-12 text-center">
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
+      // Get form values
+      const formData = {
+        to_name: "Mimi na Jamii Foundation", // Recipient
+        from_name: document.querySelector('[name="name"]').value,  // Sender's name
+        from_email: document.querySelector('[name="email"]').value, // Sender's email
+        reply_to: document.querySelector('[name="email"]').value,  // For direct replies
+        subject: document.querySelector('[name="subject"]').value, // Email subject
+        message: document.querySelector('[name="message"]').value  // Message content
+      };
 
-              <button type="submit">Send Message</button>
-            </div>
+      // Show loading animation
+      document.querySelector(".loading").style.display = "block";
+      document.querySelector(".error-meseji").style.display = "none";
+      document.querySelector(".sent-message").style.display = "none";
 
-          </div>
-        </form>
+      // Send email using EmailJS
+      //emailjs.send("service_8nqnv0j", "template_5bsehrl", formData)
+      emailjs.send("service_k59w15o", "template_ymg0u88", formData)
+      
+        .then(response => {
+          document.querySelector(".loading").style.display = "none";
+          document.querySelector(".sent-message").style.display = "block";
+          document.querySelector(".php-email-form").reset();
+        })
+        .catch(error => {
+          console.error("EmailJS Error:", error);
+          document.querySelector(".loading").style.display = "none";
+          document.querySelector(".error-meseji").innerText = "Failed to send message. Check console for details.";
+          document.querySelector(".error-meseji").style.display = "block";
+        });
+    });
+  });
+</script>
+
       </div><!-- End Contact Form -->
 
     </div>
@@ -1440,6 +1489,51 @@
       </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    emailjs.init("3KB3W2CByomxfFC_M"); // Your Public Key
+
+    document.querySelector(".php-email-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      // Get form values
+      const formData = {
+        to_name: "Mimi na Jamii Foundation", // Recipient
+        from_name: document.querySelector('[name="name"]').value,  // Sender's name
+        from_email: document.querySelector('[name="email"]').value, // Sender's email
+        reply_to: document.querySelector('[name="email"]').value,  // For direct replies
+        subject: document.querySelector('[name="subject"]').value, // Email subject
+        message: document.querySelector('[name="message"]').value  // Message content
+      };
+
+      // Show loading animation
+      document.querySelector(".loading").style.display = "block";
+      document.querySelector(".error-meseji").style.display = "none";
+      document.querySelector(".sent-message").style.display = "none";
+
+      // Send email using EmailJS
+      //emailjs.send("service_8nqnv0j", "template_5bsehrl", formData)
+      emailjs.send("service_8nqnv0j", "template_5bsehrl", formData)
+      
+        .then(response => {
+          document.querySelector(".loading").style.display = "none";
+          document.querySelector(".sent-message").style.display = "block";
+          document.querySelector(".php-email-form").reset();
+        })
+        .catch(error => {
+          console.error("EmailJS Error:", error);
+          document.querySelector(".loading").style.display = "none";
+          document.querySelector(".error-meseji").innerText = "Failed to send message. Check console for details.";
+          document.querySelector(".error-meseji").style.display = "block";
+        });
+    });
+  });
+</script>
+
+
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
